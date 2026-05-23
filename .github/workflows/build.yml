@@ -36,6 +36,20 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Create Maven settings.xml
+        run: |
+            cat > settings.xml <<EOF
+            <settings>
+              <servers>
+                <server>
+                  <id>github</id>
+                  <username>tRUStworthyq</username>
+                  <password>${{ secrets.PACKAGES_TOKEN }}</password>
+                </server>
+              </servers>
+            </settings>
+            EOF
+
       - name: Build and push Docker image
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         uses: docker/build-push-action@v6
