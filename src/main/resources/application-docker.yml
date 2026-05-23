@@ -1,0 +1,11 @@
+management:
+  zipkin:
+    tracing:
+      endpoint: http://jaeger:14268/api/traces
+
+logging:
+  logstash:
+    encoder:
+      destination: "logstash:5000"
+
+
