@@ -11,4 +11,4 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /opt/app
 COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-XX:+UseZGC", "-XX:MaxRAMPercentage=75.0", "-XX:+ExitOnOutOfMemoryError", "-Dspring.profiles.active=docker", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-XX:+UseZGC", "-XX:MaxRAMPercentage=75.0", "-XX:+ExitOnOutOfMemoryError", "-Dspring.profiles.active=docker", "-jar", "/opt/app/*.jar"]

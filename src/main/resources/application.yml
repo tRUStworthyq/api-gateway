@@ -32,6 +32,8 @@ server:
       cookie:
         http-only: true
         same-site: lax
+  tomcat:
+    connection-timeout: 60s
 
 management:
   endpoints:

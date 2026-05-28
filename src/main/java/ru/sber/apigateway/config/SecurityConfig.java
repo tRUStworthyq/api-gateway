@@ -2,7 +2,6 @@ package ru.sber.apigateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -18,7 +17,9 @@ public class SecurityConfig {
                 .requestMatchers("/actuator/**", "/login/**", "/oauth2/**").permitAll()
                 .anyRequest().authenticated()
             )
-            .oauth2Login(Customizer.withDefaults())
+            .oauth2Login(oauth2 -> oauth2
+                .defaultSuccessUrl("/ui", false)
+            )
             .csrf(csrf -> csrf.disable());
         return http.build();
     }
